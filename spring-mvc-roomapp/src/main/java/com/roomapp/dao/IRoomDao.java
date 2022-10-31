@@ -22,6 +22,9 @@ public interface IRoomDao {
 
 	List<Room> findByCategory(String category);
 
+	List<Room> findByType(String type);
+
+	
 	List<Room> findByRoomType(String roomType, double price);
 
 	List<Room> findByAvailabilityAndType(LocalDate startDate, String category, String roomType);

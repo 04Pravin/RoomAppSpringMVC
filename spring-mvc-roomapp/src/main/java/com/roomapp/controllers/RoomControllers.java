@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.roomapp.exception.CategoryNotFoundException;
+import com.roomapp.exception.TypeNotFoundException;
 import com.roomapp.model.Room;
 import com.roomapp.service.IRoomService;
 @Controller
@@ -45,7 +46,7 @@ public class RoomControllers {
 	}
 	
 	@RequestMapping("delete-room")
-	public String deleteRoom(@RequestParam("roomNumber")int roomNumber) {
+	public String deleteRoom(@RequestParam("roomNumber")Integer roomNumber) {
 		roomService.deleteRoom(roomNumber);
 		return "admin";
 	}
@@ -54,7 +55,15 @@ public class RoomControllers {
 	public String getByCategory(@RequestParam("category") String category, Model model) throws CategoryNotFoundException {
 		List<Room>rooms = roomService.getByCategory(category);
 		model.addAttribute("rooms", rooms);
-		return "home";
+		return "user";
+		
+	}
+	
+	@RequestMapping("search-type")
+	public String getByType(@RequestParam("type")String type, Model model) throws TypeNotFoundException {
+		List<Room>rooms = roomService.getByType(type);
+		model.addAttribute("rooms", rooms);
+		return "user";
 		
 	}
 }

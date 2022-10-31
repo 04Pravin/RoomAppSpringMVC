@@ -12,7 +12,7 @@
 		<table>
 			<tr>
 				<td><label>Enter room number:</label></td>
-				<td><input type="number" name="deleteNumber"></td>
+				<td><input type="number" name="roomNumber"></td>
 			<tr>
 				<td><input type="submit" name="submit" value="Delete Room"></td>
 			</tr>

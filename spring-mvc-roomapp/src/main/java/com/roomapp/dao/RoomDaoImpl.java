@@ -164,6 +164,14 @@ public class RoomDaoImpl implements IRoomDao {
 			return room;
 		},roomNumber);
 	}
+
+
+	@Override
+	public List<Room> findByType(String type) {
+		RowMapper<Room> mapper = new RoomMapper();
+		List<Room>rooms = jdbcTemplate.query(Queries.QUERYFORTYPE,mapper,type);
+		return rooms;
+	}
 	
 
 }

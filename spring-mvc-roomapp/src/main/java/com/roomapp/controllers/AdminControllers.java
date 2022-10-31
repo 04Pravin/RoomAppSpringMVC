@@ -13,6 +13,12 @@ public class AdminControllers {
 		return "admin";
 	}
 	
+	@RequestMapping("user")
+	public String userPage() {
+
+		return "user";
+	}
+	
 	@RequestMapping("addRoomForm")
 	public String addRoom(Model model) {
 		return "addRoomForm";
@@ -25,7 +31,8 @@ public class AdminControllers {
 	}
 	
 	@RequestMapping("deleteRoomForm")
-	public String deleteRoom(Model model) {
+	public String deleteRoom() {
 		return "deleteRoomForm";
 	}
+	
 }

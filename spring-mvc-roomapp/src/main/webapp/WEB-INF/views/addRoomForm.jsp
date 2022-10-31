@@ -53,7 +53,7 @@
 				<td><input type="number" name="availability">
 			</tr>
 			<tr>
-				<td><input type="submit" name="submit" value="Add Doctor"></td>
+				<td><input type="submit" name="submit" value="Add Room"></td>
 			</tr>
 		</table>
 	</form>

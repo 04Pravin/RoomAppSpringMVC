@@ -79,13 +79,12 @@ public class RoomServiceImpl implements IRoomService {
 	@Override
 	public List<Room> getByCategoryAndPrice(String category, double price) throws CategoryNotFoundException {
 		List<Room> rooms = roomDao.findByCategoryAndPrice(category, price);
-		rooms = rooms.stream().sorted((roomOne, roomTwo) -> roomOne.getRoomNumber().compareTo(roomTwo.getRoomNumber()))
-				.collect(Collectors.toList());
 		if (rooms.isEmpty()) {
 			throw new CategoryNotFoundException("Ivalid category");
 		}
 
-		return rooms;
+		return rooms.stream().sorted((roomOne, roomTwo) -> roomOne.getRoomNumber().compareTo(roomTwo.getRoomNumber()))
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -97,13 +96,13 @@ public class RoomServiceImpl implements IRoomService {
 	@Override
 	public List<Room> getByCategory(String category) throws CategoryNotFoundException {
 		List<Room> rooms = roomDao.findByCategory(category);
-		rooms = rooms.stream()
-				.sorted((roomThree, roomFour) -> roomThree.getRoomNumber().compareTo(roomFour.getRoomNumber()))
-				.collect(Collectors.toList());
 		if (rooms.isEmpty()) {
 			throw new CategoryNotFoundException("Sorry searching category is not available");
 		}
-		return rooms;
+		return rooms.stream()
+				.sorted((roomThree, roomFour) -> roomThree.getRoomNumber().compareTo(roomFour.getRoomNumber()))
+				.collect(Collectors.toList());
+		
 	}
 
 	/**
@@ -116,15 +115,13 @@ public class RoomServiceImpl implements IRoomService {
 	@Override
 	public List<Room> getByRoomType(String roomType, double price) throws TypeNotFoundException {
 		List<Room> rooms = roomDao.findByRoomType(roomType, price);
-		rooms = rooms.stream()
-				.sorted((roomThree, roomFour) -> roomThree.getRoomNumber().compareTo(roomFour.getRoomNumber()))
-				.collect(Collectors.toList());
-
 		if (rooms.isEmpty()) {
 			throw new TypeNotFoundException("Sorry your search is not available");
 		}
+		return rooms.stream()
+				.sorted((roomThree, roomFour) -> roomThree.getRoomNumber().compareTo(roomFour.getRoomNumber()))
+				.collect(Collectors.toList());
 
-		return rooms;
 	}
 
 	/**
@@ -154,16 +151,15 @@ public class RoomServiceImpl implements IRoomService {
 			throws RoomNotAvailableException {
 
 		List<Room> rooms = new ArrayList<>();
-		rooms = roomDao.findByAvailabilityAndType(startDate, category, roomType).stream()
-				.sorted((roomOne, roomTwo) -> roomOne.getArrivalDate().compareTo(roomTwo.getArrivalDate()))
-				.collect(Collectors.toList());
 
 		if (rooms.isEmpty()) {
 			throw new RoomNotAvailableException("Sorry rooms are not available for your search");
-		} else {
+		} 
 
-			return rooms;
-		}
+			return roomDao.findByAvailabilityAndType(startDate, category, roomType).stream()
+					.sorted((roomOne, roomTwo) -> roomOne.getArrivalDate().compareTo(roomTwo.getArrivalDate()))
+					.collect(Collectors.toList());
+		
 	}
 
 	/**
@@ -175,21 +171,32 @@ public class RoomServiceImpl implements IRoomService {
 	@Override
 	public List<Room> getByAvailability(LocalDate startDate) throws RoomNotAvailableException {
 		List<Room> rooms = new ArrayList<>();
-		rooms = roomDao.findByAvailability(startDate).stream()
+		if (rooms.isEmpty()) {
+			throw new RoomNotAvailableException("Sorry rooms are not available for your search");
+		} 
+		return roomDao.findByAvailability(startDate).stream()
 				.sorted((roomOne, roomTwo) -> roomOne.getArrivalDate().compareTo(roomTwo.getArrivalDate()))
 				.collect(Collectors.toList());
 
-		if (rooms.isEmpty()) {
-			throw new RoomNotAvailableException("Sorry rooms are not available for your search");
-		} else {
-
-			return rooms;
-		}
 	}
 
 	@Override
 	public Room getByRoomNumber(int roomNumber) {
 		
 		return roomDao.findByRoomNumber(roomNumber);
+	}
+
+	@Override
+	public List<Room> getByType(String roomType) throws TypeNotFoundException {
+		
+		List<Room>rooms= roomDao.findByType(roomType);
+		if(rooms.isEmpty()) {
+			throw new TypeNotFoundException("Type not available");
+		}
+		
+		return rooms.stream()
+		.sorted()
+		.collect(Collectors.toList());
+		
 	}
 }

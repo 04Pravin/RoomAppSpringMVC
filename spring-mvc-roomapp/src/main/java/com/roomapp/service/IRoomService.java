@@ -25,6 +25,8 @@ public interface IRoomService {
 	List<Room> getByCategoryAndPrice(String category, double price) throws CategoryNotFoundException;
 
 	List<Room> getByCategory(String category) throws CategoryNotFoundException;
+	
+	List<Room> getByType(String roomType) throws TypeNotFoundException;
 
 	List<Room> getByRoomType(String roomType, double price) throws TypeNotFoundException;
 

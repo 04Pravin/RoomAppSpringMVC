@@ -16,6 +16,8 @@ public class Queries {
 	
 	public static final String QUERYBYCATEGORY = "select * from Room where category = ?";
 	
+	public static final String QUERYFORTYPE = "select * from Room where roomType = ?";
+	
 	public static final String QUERYBYTYPEANDPRICE = "select * from Room where roomType = ? and price = ?";
 	
 	public static final String QUERYBYPRICE = "select * from Room ";

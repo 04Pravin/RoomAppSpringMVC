@@ -1,7 +1,7 @@
 package com.roomapp.model;
 
 public enum RoomType {
-	STANDARDQUEEN("Queen SIze"), 
+	STANDARDQUEEN("Queen Size"), 
 	STANDARDKING("King Size"), 
 	STANDARD("Standard"),
 	DELUXE("Double"), 
